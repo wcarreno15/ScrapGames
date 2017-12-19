@@ -1,0 +1,3 @@
+class ConsoleType < ApplicationRecord
+
+end
