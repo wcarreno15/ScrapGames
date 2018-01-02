@@ -2,7 +2,9 @@ class Game < ApplicationRecord
   has_many :GameHistory
   has_many :GameSource
 
-  def ScrapGames
-    
+  def ScrapGamesIgdb
+    ScrapIgdbJob.perform(48)
+
   end
+
 end
