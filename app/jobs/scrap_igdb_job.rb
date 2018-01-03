@@ -1,7 +1,7 @@
 class ScrapIgdbJob < ApplicationJob
   queue_as :default
 
-  def self.perform(plataform_id)
+  def self.perform(plataform_id, code)
     puts "Scrapp IGDB"
 
     agent= Mechanize.new
@@ -20,6 +20,8 @@ class ScrapIgdbJob < ApplicationJob
     p = 0
     plataform_id = 48
 
+    console_type = ConsoleType.consoleTypeByCode(code)
+
     page = agent.get(
       "https://www.igdb.com/advanced_search?d=1&f[type]=games&s=score&p=#{p}&f[platforms.id_in]=#{plataform_id}",
       [],
@@ -29,7 +31,7 @@ class ScrapIgdbJob < ApplicationJob
     response = JSON.parse page.body
 
     while response.any? do
-      Game.save_game(response)
+      Game.save_game(response, console_type)
 
       p += 1
       page = agent.get(

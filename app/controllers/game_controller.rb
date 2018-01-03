@@ -1,10 +1,10 @@
 class GameController < ApplicationController
 
   def index
-    ScrapIgdbJob.perform(48)
+    ScrapIgdbJob.set(wait: 1.minute).perform_later(48, 'ps4')
   end
 
-  def self.scrap
-    ScrapIgdbJob.perform(48)
+  def init_scrap
+    ScrapgdbJob.perform_later(48, 'ps4')
   end
 end
