@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219202859) do
+ActiveRecord::Schema.define(version: 20180102174431) do
 
   create_table "console_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
+    t.string "code"
   end
 
   create_table "game_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171219202859) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
     t.index ["console_types_id"], name: "index_games_on_console_types_id"
   end
 
