@@ -29,7 +29,6 @@ class ScrapIgdbJob < ApplicationJob
     response = JSON.parse page.body
 
     while response.any? do
-      puts response
       Game.save_game(response)
 
       p += 1
