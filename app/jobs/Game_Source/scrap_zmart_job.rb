@@ -1,5 +1,4 @@
-# Scrap Games
-class ScrapGamesJob < ApplicationJob
+class ScrapZmartJob < ApplicationJob
   queue_as :default
 
   def perform(origen, console_type)

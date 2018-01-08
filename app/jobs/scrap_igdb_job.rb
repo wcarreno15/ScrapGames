@@ -1,7 +1,7 @@
 class ScrapIgdbJob < ApplicationJob
   queue_as :default
 
-  def self.perform(plataform_id, code)
+  def perform(plataform_id, code)
     puts "Scrapp IGDB"
 
     agent= Mechanize.new
@@ -30,6 +30,8 @@ class ScrapIgdbJob < ApplicationJob
     )
     response = JSON.parse page.body
 
+    puts "Inicio Scrap Games codigo #{code}"
+
     while response.any? do
       Game.save_game(response, console_type)
 
@@ -45,5 +47,7 @@ class ScrapIgdbJob < ApplicationJob
       response =  JSON.parse page.body
     end
 
+    puts "Fin Scrapping - codigo #{code}"
+    puts "Paginas scrappeadas: #{p}"
   end
 end
