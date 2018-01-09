@@ -18,11 +18,15 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :environment, "development"
+set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every 1.day, :at => '4:30 am' do
-  runner "ScrapgdbJob.perform_later(48, 'ps4')"
+every 1.minute do
+  runner "ScrapIgdbJob.perform_later(48,'ps4')"
+  puts 'Success!'
 end
 
 every 3.hours do # 1.minute 1.day 1.week 1.month 1.year is also supported
-  runner "ScrapGamesJob.perform_later('Zmart', '')"
+  runner "ScrapGamesJob.perform_later('Zmart', nil)"
+  puts 'Success!'
 end
