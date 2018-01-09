@@ -21,8 +21,8 @@
 set :environment, "development"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every 1.minute do
-  runner "ScrapIgdbJob.perform_later(48,'ps4')"
+every 5.minutes do
+  runner "Util.init_scrap_names"
   puts 'Success!'
 end
 

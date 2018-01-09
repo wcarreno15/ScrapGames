@@ -42,6 +42,7 @@ class ScrapIgdbJob < ApplicationJob
         'https://www.igdb.com/advanced_search',
         header
       )
+      puts "page: #{p}"
 
       response =  JSON.parse page.body
     end
