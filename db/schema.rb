@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218214544) do
+ActiveRecord::Schema.define(version: 20171219202859) do
 
   create_table "console_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
@@ -25,14 +25,24 @@ ActiveRecord::Schema.define(version: 20171218214544) do
     t.index ["sources_id"], name: "index_game_histories_on_sources_id"
   end
 
+  create_table "game_source_names", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "games_id"
+    t.bigint "sources_id"
+    t.index ["games_id"], name: "index_game_source_names_on_games_id"
+    t.index ["sources_id"], name: "index_game_source_names_on_sources_id"
+  end
+
   create_table "game_sources", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "games_id"
     t.bigint "game_histories_id"
     t.string "url"
     t.integer "historical_max"
     t.integer "historical_min"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "games_id"
     t.index ["game_histories_id"], name: "index_game_sources_on_game_histories_id"
     t.index ["games_id"], name: "index_game_sources_on_games_id"
   end
